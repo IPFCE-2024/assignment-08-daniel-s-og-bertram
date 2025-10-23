@@ -15,7 +15,9 @@
  * Post-condition: queue is empty with front and rear set to NULL
  */
 void initialize(queue *q) {
-    /* TODO: Initialize the queue */
+    q->count = 0;
+    q->front = NULL;
+    q->rear = NULL;
 }
 
 /* 
@@ -27,7 +29,24 @@ void initialize(queue *q) {
  * Post-condition: x is added to the rear of the queue
  */
 void enqueue(queue *q, int x) {
-    /* TODO: Implement enqueue */
+    node *new = (node*)malloc(sizeof(node));
+    if (new == NULL) {
+        // not enough available memory
+        abort();
+    }
+    new->data = x;
+    new->next = NULL;
+
+    if (empty(q)) {
+        q->front = new;
+        q->rear = new;
+    }
+    else {
+    q->rear->next = new;
+    q->rear = new;
+    }
+
+    q->count += 1;
 }
 
 /* 
@@ -38,8 +57,24 @@ void enqueue(queue *q, int x) {
  * Post-condition: front item is removed and returned
  */
 int dequeue(queue *q) {
-    /* TODO: Implement dequeue */
-    return 0;  
+    assert(!empty(q));
+
+    // grab data
+    int x = q->front->data;
+
+    // update front and free node
+    q->front = q->front->next;
+    free(q->front);
+
+    // update count
+    q->count -= 1;
+
+    // unique case where the dequeued node was the last one in the queue
+    if (empty(q)) {
+        q->rear = NULL;
+    }
+
+    return x;  
 }
 
 /* 
@@ -48,8 +83,7 @@ int dequeue(queue *q) {
  * Returns: true if queue is empty, false otherwise
  */
 bool empty(const queue *q) {
-    /* TODO: Implement empty check */
-    return false; 
+    return q->count == 0; 
 }
 
 /* 
@@ -58,7 +92,7 @@ bool empty(const queue *q) {
  * Returns: true if queue is full, false otherwise
  */
 bool full(const queue *q) {
-    /* TODO: Implement full check */
+    // lists are never full
     return false;
 }
 
