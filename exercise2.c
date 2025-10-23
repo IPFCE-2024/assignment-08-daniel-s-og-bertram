@@ -17,35 +17,43 @@
  * not by creating new nodes or swapping data values.
  */
 node* isort(node* list) {
-    node *sorted = NULL;
-    node *cursor;
-    node *crawler;
+    node *head = list; // Sorted list
+    node *curr = list->next;
+    node *prev = list;
+    node *cursor = head; // Cursor to sorted list
+    node *temp; // Temp value for storing
+    int j = 1;
 
-    while (list != NULL) {
-        cursor = list;
-        list = list->next;
-
-        if (sorted == NULL) {
-            sorted = cursor;
-            sorted->next = NULL;
-            continue;
+    while(curr != NULL){
+        for(int i=0; i<j; i++){
+            // Case 1: Place curr at head
+            if(curr->data < head->data){
+                temp = curr;
+                prev->next = curr->next;
+                temp->next = head;
+                head = temp;
+                break;
+            }
+            // Case 2: Place in the sorted list
+            if(curr->data < cursor->next->data){
+                temp = curr;
+                prev->next = curr->next;
+                temp->next = cursor->next;
+                cursor->next = temp;
+                break;
+            }
+            // Case 3: Place in the back
+            if(curr->data > prev->data){
+                break;
+            }
+            cursor = cursor->next;
         }
-        
-        crawler = sorted;
-
-        while((crawler->next != NULL) | (crawler->next->data < cursor->data)) {
-            crawler = crawler->next;
-        }
-        if (crawler->next = NULL) {
-            crawler->next = cursor;
-            crawler->next->next = NULL;
-        }
-        else {
-            cursor->next = crawler->next;
-            crawler->next = crawler;
-        }
+        j++;
+        cursor = head;
+        prev = curr;
+        curr = curr->next;
     }
-    return sorted;
+    return head;
 }
 
 /* Helper function to create a node */
