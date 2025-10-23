@@ -84,7 +84,7 @@ void enqueue(queue *q, int x) {
     
     push(ps1, x);
     
-    // put it all back from s2 into s1 intop of the enqueued item
+    // put it all back from s2 into s1 ontop of the enqueued item
     while(!empty(ps2)) {
         push(ps1, pop(ps2));
     }
