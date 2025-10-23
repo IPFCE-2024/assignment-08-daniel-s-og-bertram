@@ -18,6 +18,28 @@
  */
 void isort(node* list) {
     /* TODO: Implement insertion sort for linked list */
+    node* prev = list;
+    node* curr = list->next;
+    node* next = curr->next;
+
+    while(curr->next != NULL){
+        if(prev->data > curr->data){ // Switch curr and prev (curr < prev)
+            curr = prev;
+            prev = curr->next;
+        }
+        else if (next->data < curr->data) // Switch curr and next (curr > next)
+        {
+            next = curr;
+            curr = curr->next;
+        }
+        else if(curr->data > prev->data && curr->data < next->data){ // Move over to next node
+            prev = curr;
+            curr = next;
+            next = next->next;
+        }
+    }
+
+
 }
 
 /* Helper function to print the list */
@@ -32,5 +54,3 @@ void print_list(node* list) {
     }
     printf(" -> NULL\n");
 }
-
-
