@@ -72,7 +72,7 @@ int main() {
     node* list1 = create_list_from_array(arr1, 5);
     printf("Before: ");
     print_list(list1);
-    isort(list1);
+    list1 = isort(list1);
     printf("After:  ");
     print_list(list1);
     assert(is_sorted(list1) && "Test 1 failed: List should be sorted");
@@ -87,7 +87,7 @@ int main() {
     node* list2 = create_list_from_array(arr2, 5);
     printf("Before: ");
     print_list(list2);
-    isort(list2);
+    list2 = isort(list2);
     printf("After:  ");
     print_list(list2);
     assert(is_sorted(list2) && "Test 2 failed: List should remain sorted");
@@ -102,7 +102,7 @@ int main() {
     node* list3 = create_list_from_array(arr3, 5);
     printf("Before: ");
     print_list(list3);
-    isort(list3);
+    list3 = isort(list3);
     printf("After:  ");
     print_list(list3);
     assert(is_sorted(list3) && "List should be sorted");
@@ -117,7 +117,7 @@ int main() {
     node* list4 = create_list_from_array(arr4, 5);
     printf("Before: ");
     print_list(list4);
-    isort(list4);
+    list4 = isort(list4);
     printf("After:  ");
     print_list(list4);
     assert(is_sorted(list4) && "List should be sorted");
@@ -132,7 +132,7 @@ int main() {
     node* list5 = create_list_from_array(arr5, 2);
     printf("Before: ");
     print_list(list5);
-    isort(list5);
+    list5 = isort(list5);
     printf("After:  ");
     print_list(list5);
     assert(is_sorted(list5) && "List should be sorted");
@@ -147,7 +147,7 @@ int main() {
     node* list6 = create_list_from_array(arr6, 4);
     printf("Before: ");
     print_list(list6);
-    isort(list6);
+    list6 = isort(list6);
     printf("After:  ");
     print_list(list6);
     assert(is_sorted(list6) && "List should be sorted");

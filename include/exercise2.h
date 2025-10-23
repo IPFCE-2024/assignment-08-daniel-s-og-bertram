@@ -22,7 +22,7 @@ typedef struct node {
  * The list should be sorted from smallest to largest
  * No new nodes should be allocated - only pointers should be changed
  */
-void isort(node* list);
+node* isort(node* list);
 
 /* Helper function to create a node */
 node* create_node(int data);

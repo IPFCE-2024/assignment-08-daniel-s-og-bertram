@@ -7,7 +7,7 @@
  * No new nodes should be allocated - only pointers should be changed.
  */
 
-#include "exercise2.h"
+#include "./include/exercise2.h"
 
 /* 
  * Sort a singly linked list in-place using insertion sort
@@ -16,41 +16,68 @@
  * The function should sort the list by rearranging pointers,
  * not by creating new nodes or swapping data values.
  */
-void isort(node* list) {
-    /* TODO: Implement insertion sort for linked list */
-    node* prev = list;
-    node* curr = list->next;
-    node* next = curr->next;
+node* isort(node* list) {
+    node *sorted = NULL;
+    node *cursor;
+    node *crawler;
 
-    while(curr->next != NULL){
-        if(prev->data > curr->data){ // Switch curr and prev (curr < prev)
-            curr = prev;
-            prev = curr->next;
+    while (list != NULL) {
+        cursor = list;
+        list = list->next;
+
+        if (sorted == NULL) {
+            sorted = cursor;
+            sorted->next = NULL;
+            continue;
         }
-        else if (next->data < curr->data) // Switch curr and next (curr > next)
-        {
-            next = curr;
-            curr = curr->next;
+        
+        crawler = sorted;
+
+        while((crawler->next != NULL) | (crawler->next->data < cursor->data)) {
+            crawler = crawler->next;
         }
-        else if(curr->data > prev->data && curr->data < next->data){ // Move over to next node
-            prev = curr;
-            curr = next;
-            next = next->next;
+        if (crawler->next = NULL) {
+            crawler->next = cursor;
+            crawler->next->next = NULL;
+        }
+        else {
+            cursor->next = crawler->next;
+            crawler->next = crawler;
         }
     }
-
-
+    return sorted;
 }
 
-/* Helper function to print the list */
-void print_list(node* list) {
-    node* current = list;
+/* Helper function to create a node */
+node* create_node(int data) {
+    node *new_node = (node*)malloc(sizeof(node));
+    if (!new_node) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
+}
+
+/* Helper function to free the list */
+void free_list(node* list) {
+    node *current = list;
+    node *next_node;
+
     while (current != NULL) {
-        printf("%d", current->data);
-        if (current->next != NULL) {
-            printf(" -> ");
-        }
+        next_node = current->next;
+        free(current);
+        current = next_node;
+    }
+}
+
+/* Helper function to print the list (for testing) */
+void print_list(node* list) {
+    node *current = list;
+    while (current != NULL) {
+        printf("%d ", current->data);
         current = current->next;
     }
-    printf(" -> NULL\n");
+    printf("\n");
 }
