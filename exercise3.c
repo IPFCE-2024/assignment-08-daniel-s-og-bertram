@@ -6,7 +6,7 @@
  * The queue should maintain FIFO (First-In, First-Out) order.
  */
 
-#include "exercise3.h"
+#include "./include/exercise3.h"
 
 /* 
  * Initialize an empty queue
@@ -63,8 +63,9 @@ int dequeue(queue *q) {
     int x = q->front->data;
 
     // update front and free node
+    node *oldfront = q->front;
     q->front = q->front->next;
-    free(q->front);
+    free(oldfront);
 
     // update count
     q->count -= 1;
@@ -92,6 +93,7 @@ bool empty(const queue *q) {
  * Returns: true if queue is full, false otherwise
  */
 bool full(const queue *q) {
+    (void)q;
     // lists are never full
     return false;
 }
@@ -110,3 +112,17 @@ void print_queue(const queue *q) {
     printf("\n");
 }
 
+// int main() {
+//     queue q6;
+//     initialize(&q6);
+//     for (int i = 0; i < 20; i++) {
+//         enqueue(&q6, i);
+//     }
+//     for (int i = 0; i < 20; i++) {
+//         int val = dequeue(&q6);
+//         assert(val == i && "Values should match in FIFO order");
+//     }
+//     assert(empty(&q6) && "Queue should be empty");
+//     printf("✓ Larger test passed\n\n");
+//     return 0;
+// }
